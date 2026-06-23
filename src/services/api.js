@@ -2,7 +2,8 @@
 //  - Local dev : proxied by Vite to http://localhost:3001 (api/server.js)
 //  - Vercel    : handled by api/server.js serverless function
 
-const BASE = '/api'
+// const BASE = '/api'
+const BASE = 'http://EC2-퍼블릭-IP:8080/api'
 
 async function request(url, options = {}) {
   const res = await fetch(url, {
