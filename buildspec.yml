@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - npm install
+  build:
+    commands:
+      - echo "Building React application..."
+      - npm run build
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist    # Vite 빌드 결과물 폴더
+  discard-paths: no
