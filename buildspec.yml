@@ -12,5 +12,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: dist
+  base-directory: dist    # Vite 빌드 결과물 폴더
   discard-paths: no
