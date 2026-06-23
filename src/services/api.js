@@ -3,7 +3,7 @@
 //  - Vercel    : handled by api/server.js serverless function
 
 // const BASE = '/api'
-const BASE = 'http://EC2-퍼블릭-IP:8080/api'
+const BASE = 'http://3.101.26.25:8080/api'
 
 async function request(url, options = {}) {
   const res = await fetch(url, {
