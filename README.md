@@ -6,7 +6,7 @@
 - **develop**: 다음 출시 버전을 개발하는 브랜치
 - **feature**: 기능을 개발하는 브랜치
 
-# 📌 Git branch 규칙
+# 📌 Git branch 규칙.
 
 - 개인 작업은 꼭 feature 브랜치에서 하기
 - 모든 작업 시작 전 develop에서 pull 받은 후 feature 브랜치에서 작업 시작
