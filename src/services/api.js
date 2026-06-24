@@ -4,7 +4,7 @@
 
 // const BASE = '/api'
 // const BASE = 'http://3.101.26.25:8080/api'
-const BASE = 'http://user52-ALB-305301702.us-west-1.elb.amazonaws.com'
+const BASE = 'http://user52-ALB-305301702.us-west-1.elb.amazonaws.com/api'
 
 async function request(url, options = {}) {
   const res = await fetch(url, {
