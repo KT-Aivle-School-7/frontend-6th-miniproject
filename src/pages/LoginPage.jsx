@@ -1,60 +1,47 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginMember, signupMember } from '../services/api'
-
 export default function LoginPage() {
   const navigate = useNavigate()
-
   const [form, setForm] = useState({
     memberName: '',
     memberEmail: '',
     memberPassword: '',
   })
-
   const [mode, setMode] = useState('login') // login | signup
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-
   const isSignup = mode === 'signup'
-
   function handleChange(e) {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
     setError('')
   }
-
   async function handleSubmit(e) {
     e.preventDefault()
-
     if (!form.memberName.trim()) {
       setError('사용자 이름을 입력해주세요.')
       return
     }
-
     if (!form.memberPassword.trim()) {
       setError('비밀번호를 입력해주세요.')
       return
     }
-
     try {
       setLoading(true)
       setError('')
-
       if (isSignup) {
         await signupMember(form)
         alert('회원가입이 완료되었습니다. 로그인해주세요.')
         setMode('login')
         return
       }
-
       const result = await loginMember({
         memberName: form.memberName,
         memberPassword: form.memberPassword,
       })
-
-      localStorage.setItem('memberName', result.memberName)
-      localStorage.setItem('memberEmail', result.memberEmail || '')
-
+      localStorage.setItem('memberName', result.memberName || form.memberName)
+      localStorage.setItem('memberEmail', result.memberEmail || form.memberEmail || '')
       navigate('/books')
     } catch (err) {
       setError(err.message || '처리 중 오류가 발생했습니다.')
@@ -62,7 +49,6 @@ export default function LoginPage() {
       setLoading(false)
     }
   }
-
   return (
     <div style={{
       minHeight: '100vh',
@@ -86,11 +72,9 @@ export default function LoginPage() {
         <h2 style={{ marginBottom: '8px' }}>
           {isSignup ? '회원가입' : '로그인'}
         </h2>
-
         <p style={{ marginBottom: '24px', color: '#666' }}>
           사용자별 도서 목록을 구분하기 위한 간단 로그인입니다.
         </p>
-
         {error && (
           <div style={{
             marginBottom: '16px',
@@ -103,7 +87,6 @@ export default function LoginPage() {
             {error}
           </div>
         )}
-
         <label>사용자 이름</label>
         <input
           name="memberName"
@@ -112,7 +95,6 @@ export default function LoginPage() {
           placeholder="예: hanbom"
           style={inputStyle}
         />
-
         {isSignup && (
           <>
             <label>이메일</label>
@@ -125,7 +107,6 @@ export default function LoginPage() {
             />
           </>
         )}
-
         <label>비밀번호</label>
         <input
           name="memberPassword"
@@ -135,7 +116,6 @@ export default function LoginPage() {
           placeholder="비밀번호"
           style={inputStyle}
         />
-
         <button
           type="submit"
           disabled={loading}
@@ -154,7 +134,6 @@ export default function LoginPage() {
         >
           {loading ? '처리 중...' : isSignup ? '회원가입' : '로그인'}
         </button>
-
         <button
           type="button"
           onClick={() => {
@@ -177,7 +156,6 @@ export default function LoginPage() {
     </div>
   )
 }
-
 const inputStyle = {
   width: '100%',
   marginTop: '6px',
